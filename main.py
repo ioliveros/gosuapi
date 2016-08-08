@@ -44,14 +44,13 @@ def matches(url='http://www.gosugamers.net/dota2/gosubet',limit=10):
 			for line in obj.text.split('\n'):
 				if not line != '': continue
 				lineArray.append(line)
-			match = {}
-			match["team1"] = str(lineArray[0])
-			match["team2"] = str(lineArray[-1])
-			match["team1pct"] = str(lineArray[1])
-			match["team2pct"] = str(lineArray[3])
-			match["href"] = 'http://www.gosugamers.net' +obj.get("href")
-			data.append(match)
-
+			data.append({
+				"team1" : str(lineArray[0]),
+				"team2" : str(lineArray[-1]),
+				"team1pct" : str(lineArray[1]),
+				"team2pct" : str(lineArray[3]),
+				"href" : 'http://www.gosugamers.net' +obj.get("href")
+			})
 	main["matches"] = data
 	return main
 
@@ -72,11 +71,11 @@ def rankings(url='http://www.gosugamers.net/dota2/rankings',limit=20):
 				if not str(line) != "": continue
 				lineArray.append(line)
 			if len(lineArray) < 3: continue
-			row = {}
-			row['rank'] = lineArray[0]			
-			row['teamname'] = lineArray[1]			
-			row['score'] = lineArray[2]			
-			data.append(row)
+			data.append({
+				"rank" : str(lineArray[0]),
+				"teamname" : str(lineArray[1]),
+				"score" : str(lineArray[2])
+			})
 	main['rankings'] = data
 	return main
 
@@ -84,7 +83,7 @@ def hero_statistics(url='http://www.gosugamers.net/dota2/hero-stats'):
 
 	soup_text,main,data = web_bsoupify(url),{},[]
 	if not soup_text: return url + ': error in web api call, try again later'
-
+	
 	return main
 
 def events(url='http://www.gosugamers.net/events'):
@@ -95,8 +94,8 @@ def events(url='http://www.gosugamers.net/events'):
 	return main
 
 if __name__ == '__main__':
-	#print headlines()
+	print headlines()
 	#print matches()
 	#print rankings()
 	#print hero_statistics()
-	#print events()
+	##print events()
