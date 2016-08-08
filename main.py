@@ -1,3 +1,4 @@
+import re
 from utils import *
 
 """
@@ -55,11 +56,28 @@ def matches(url='http://www.gosugamers.net/dota2/gosubet',limit=10):
 	return main
 
 
-def rankings(url='http://www.gosugamers.net/dota2/rankings'):
+def rankings(url='http://www.gosugamers.net/dota2/rankings',limit=20):
 
 	soup_text,main,data = web_bsoupify(url),{},[]
 	if not soup_text: return url + ': error in web api call, try again later'
 
+	for div in soup_text.findAll('div'):
+		if not div.attrs.has_key('class'): continue
+		if not 'container' in div.attrs['class']: continue
+		for obj in div.findAll('tr'):
+			if len(data) >= limit: break
+			lineArray = []
+			for obj2 in obj.findAll('td'):
+				line = re.sub(" ","",str(obj2.text).strip('\n'))
+				if not str(line) != "": continue
+				lineArray.append(line)
+			if len(lineArray) < 3: continue
+			row = {}
+			row['rank'] = lineArray[0]			
+			row['teamname'] = lineArray[1]			
+			row['score'] = lineArray[2]			
+			data.append(row)
+	main['rankings'] = data
 	return main
 
 def hero_statistics(url='http://www.gosugamers.net/dota2/hero-stats'):
@@ -77,7 +95,7 @@ def events(url='http://www.gosugamers.net/events'):
 	return main
 
 if __name__ == '__main__':
-	print headlines()
+	#print headlines()
 	#print matches()
 	#print rankings()
 	#print hero_statistics()
