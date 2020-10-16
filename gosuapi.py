@@ -94,7 +94,7 @@ def events(url='http://www.gosugamers.net/events'):
 	return main
 
 if __name__ == '__main__':
-	print headlines()
+	print(headlines())
 	#print matches()
 	#print rankings()
 	#print hero_statistics()
