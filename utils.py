@@ -11,6 +11,6 @@ def web_bsoupify(url=None,src_code=None,soup_txt=None):
 			return soup_txt
 		except Exception as err:
 			print('Error request: {0}, retrying.. '.format(err))
-			time.sleep(1)	
+			time.sleep(0.125)	
 			return call_request(url)
 	return call_request(url)

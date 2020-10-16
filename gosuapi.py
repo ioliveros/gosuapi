@@ -15,7 +15,7 @@ def headlines(url='http://www.gosugamers.net/dota2'):
 	if not soup_text: return url + ': error in web api call, try again later'
 	
 	for div in soup_text.findAll('div'):
-		if div.attrs.has_key('class'):
+		if div.attrs.get('class'):
 			if 'showcase-content' in div.attrs['class']:
 				row = {}
 				for obj in div.findAll('a'):
@@ -92,10 +92,3 @@ def events(url='http://www.gosugamers.net/events'):
 	if not soup_text: return url + ': error in web api call, try again later'
 
 	return main
-
-if __name__ == '__main__':
-	print(headlines())
-	#print matches()
-	#print rankings()
-	#print hero_statistics()
-	##print events()
