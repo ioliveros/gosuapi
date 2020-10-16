@@ -5,5 +5,6 @@ setup(
 	version='1.1',
 	author='Ian Oliveros',
 	author_email='ioliveros.dev@gmail.com',
-	packages=find_packages()
+	packages=find_packages(),
+	python_requires='>=3.6'
 )
