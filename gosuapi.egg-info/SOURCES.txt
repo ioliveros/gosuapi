@@ -1,8 +1,0 @@
-MANIFEST.in
-README.md
-requirements.txt
-setup.py
-gosuapi.egg-info/PKG-INFO
-gosuapi.egg-info/SOURCES.txt
-gosuapi.egg-info/dependency_links.txt
-gosuapi.egg-info/top_level.txt
