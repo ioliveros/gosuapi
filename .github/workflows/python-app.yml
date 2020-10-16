@@ -9,4 +9,4 @@ jobs:
     - name: github action for gosuapi
       uses: cclauss/Github-Action-for-pytest@master
       with:
-        args: python setup.py develop && pytest
+        args: pip install -r requirements.txt && python setup.py develop && pytest
